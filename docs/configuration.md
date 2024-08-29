@@ -73,14 +73,23 @@ For *pedestrians* configuration file, the examples are shown below
 ```yaml
 ## pedestrians_config.yaml
 
+# 这是为SFM(Social Force Model)算法配置的，模拟行人或其他自主体在环境中的运动。SFM 主要用于社交导航和避障任务，尤其在拥挤环境下模拟多主体的运动行为。
 # sfm algorithm configure
 social_force:
+  # 动画因子可能用于控制模拟的速度或视觉化的步调。较大的值可能会使运动更快，较小的值则可能会减慢动画速度
   animation_factor: 5.1
-  # only handle pedestrians within `people_distance`
+
+  # only handle pedestrians within `people_distance`,这个参数定义了算法只考虑距主体（如机器人、其他行人等）6.0米以内的行人。超出这个距离的行人将不被纳入考虑
   people_distance: 6.0
+
   # weights of social force model
+  # 目标权重控制了主体朝向目标位置移动的意愿。较高的权重意味着主体更倾向于朝目标方向前进。直接影响运动规划中的目标导向性，确保主体不会被过多的社交或障碍物因素干扰。
   goal_weight: 2.0
+
+  #  障碍物权重定义了主体对避开障碍物的重视程度。数值越大，主体越会优先考虑避开障碍物
   obstacle_weight: 80.0
+
+  # 社交权重决定了主体与其他行人之间的社交距离和互动影响。较大的值表示主体更会避免接近其他行人
   social_weight: 15
   group_gaze_weight: 3.0
   group_coh_weight: 2.0
